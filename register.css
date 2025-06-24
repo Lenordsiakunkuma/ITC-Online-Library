@@ -1,0 +1,515 @@
+#background{
+
+    min-height: 1050px;
+    width: 100%;
+    
+    }
+    #top{
+    height: 35px;
+    width: 100%;
+    background:#2c7ad6;
+    line-height: 35px;
+    padding: 0px 20px 9px 100px;
+    box-sizing: border-box;
+    word-spacing:10px ;
+    
+    }
+    #menu{
+    height: 65px;
+    width: 100%;
+    background:green;
+    
+    }
+    #logo{
+    height: 65px;
+    width: 40%;
+    background:white;
+    text-align: center;
+    line-height: 65px;
+    font-size: 40px;
+    float: left;
+    }
+    #menu1{
+    height: 65px;
+    width: 60%;
+    background:white;
+    float: left;
+    
+    }
+    #menu1 UL{
+    list-style: none;
+    padding-left: 200px;
+    box-sizing: border-box;
+    
+    }
+    #menu1 LI{
+    height: 45px;
+    width: 130px;
+    
+    text-align: center ; 
+    display: inline-block; 
+    line-height: 45px;
+    transform: translateY(-5px);
+    color: black;
+    font-size: 20px;
+    
+    }
+    #menu1 LI:hover{
+    background: #2c7ad6;  
+    color: white; 
+    transition: all ease 1s;
+    border-radius: 3px;
+    }
+    
+    #slider{
+    height:640px;
+    width: 100%;
+    background: url('/images/itc.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    /* animation-name:slider;
+    animation-duration: 20s;
+    animation-iteration-count:infinite ;
+    animation-delay: 3s;*/
+    }
+    /*
+    @keyframes slider{
+    
+    from{
+        background:url(image/4.jpg);
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    to{
+        background:url(image/4.jpg);
+        background-size: cover;
+        background-attachment: fixed;
+    } 
+    }
+    */
+    #x{
+    height:640px;
+    width: 40%;
+    background:rgba(0,0,0, .4); 
+    float: left;
+    font-size: 41PX;
+    color: white;
+    text-align: center;
+    padding-top: 250px;
+    box-sizing: border-box;
+    }
+    #y{
+    height:640px;
+    width: 60%;
+    background:rgba(0,0,0, .4); 
+    float: left;
+    
+    
+    }
+    
+    #l{
+    height:450px;
+    width: 60%;
+    background:rgba(255,255,255, .6); 
+    float: left; 
+    margin: 90px;
+    border-radius: 7px ;
+    
+    }
+    #l:hover{
+    background:linear-gradient(45deg,rgba(50,177,40, .6),rgba(255,255,255, .6));
+    }
+    
+    
+    #student{
+    margin:50px 50px;
+    color:blue;
+    
+    }
+    #Teacher{
+    margin:50px 50px;
+    color:white;
+    }
+    .t{
+    height: 40px;
+    width: 100%;
+    border: 2px solid green;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    
+    }
+    #down{
+    height: 300px;
+    width: 100%;
+    margin-top: 10px;
+    background:#2c7ad6;
+    text-align: center;
+    padding-top: 10px;
+    color: white;
+    }
+    .footer{
+    height: 20px;
+    width: 100%;
+    background: black;
+    color: white;
+    text-align: center;
+    }
+
+
+    /* === MOBILE RESPONSIVENESS === */
+@media (max-width: 768px) {
+    #logo {
+      width: 100%;
+      font-size: 30px;
+    }
+  
+    #menu1 {
+      width: 100%;
+      padding-left: 0;
+    }
+  
+    #menu1 UL {
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    #menu1 LI {
+      width: 100%;
+      font-size: 18px;
+      transform: none;
+    }
+  
+    #slider {
+      height: auto;
+      display: flex;
+      flex-direction: column;
+    }
+  
+    #x,
+    #y {
+      width: 100%;
+      height: auto;
+      float: none;
+    }
+  
+    #x {
+      padding: 40px 10px;
+      font-size: 24px;
+    }
+  
+    #y {
+      padding: 20px 10px;
+    }
+  
+    #l {
+      width: 90%;
+      height: auto;
+      margin: 30px auto;
+      float: none;
+      padding: 20px;
+    }
+  
+    #student {
+      margin: 20px 10px;
+    }
+  
+    .t {
+      font-size: 16px;
+    }
+  
+    #top {
+      flex-direction: column;
+      padding: 10px;
+      text-align: center;
+      height: auto;
+    }
+  
+    #down {
+      height: auto;
+      padding: 20px 10px;
+    }
+  }
+  
+    
+  /* Hide mobile icons and menu by default */
+#on-mobile-menu,
+#close-menu {
+  font-size: 30px;
+  color: #2c7ad6;
+  padding: 10px;
+  cursor: pointer;
+  display: none;
+}
+
+/* Mobile menu container */
+#on-mobile-screen {
+  display: none;
+  background-color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+#on-mobile-screen ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#on-mobile-screen a {
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  border-bottom: 1px solid #ddd;
+}
+
+#on-mobile-screen a:hover {
+  background-color: #2c7ad6;
+  color: white;
+}
+
+/* Responsive handling */
+@media (max-width: 768px) {
+  #menu1 {
+    display: none;
+  }
+
+  #on-mobile-menu {
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+  }
+
+  #close-menu {
+    display: none;
+    float: right;
+    margin-right: 20px;
+  }
+
+  #logo {
+    width: 70%;
+    float: left;
+    line-height: 65px;
+    font-size: 24px;
+  }
+
+  #menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: green;
+    padding: 0 15px;
+    height: auto;
+  }
+}
+
+
+/* Header Styling */
+#main-header {
+  background-color: #2c7ad6;
+  color: white;
+  padding: 10px;
+  position: relative;
+  z-index: 1000;
+}
+
+#desktop-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#logo img {
+  height: 50px;
+}
+
+#header-title h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+#search-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#search-bar input {
+  width: 300px;
+  padding: 5px;
+  border-radius: 4px;
+  border: none;
+}
+
+#search-bar button {
+  background: white;
+  color: #2c7ad6;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#hamburger {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* Mobile Menu Styling */
+#mobile-menu {
+  display: none;
+  background-color: white;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#mobile-menu button {
+  display: block;
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+  font-size: 18px;
+  background-color: #2c7ad6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#mobile-menu .close-menu {
+  background-color: red;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  #search-bar {
+    display: none;
+  }
+
+  #hamburger {
+    display: block;
+  }
+
+  #header-title h1 {
+    font-size: 20px;
+  }
+}
+
+
+/* HEADER STYLING */
+#main-header {
+  background-color: #2c7ad6;
+  color: white;
+  padding: 10px;
+  position: relative;
+}
+
+#desktop-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#logo img {
+  height: 50px;
+}
+
+#header-title h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+#search-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#search-bar input {
+  padding: 7px;
+  border-radius: 4px;
+  border: none;
+  width: 250px;
+}
+
+#search-bar button {
+  background: white;
+  color: #2c7ad6;
+  border: none;
+  padding: 7px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* HAMBURGER */
+#hamburger {
+  font-size: 26px;
+  cursor: pointer;
+  display: none;
+}
+
+/* MOBILE MENU */
+#mobile-menu {
+  display: none;
+  background-color: white;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#mobile-menu button {
+  display: block;
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+  background-color: #2c7ad6;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#mobile-menu .close-menu {
+  background-color: red;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  #search-bar {
+    display: none;
+  }
+
+  #hamburger {
+    display: block;
+  }
+
+  #desktop-header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  #header-title h1 {
+    font-size: 18px;
+  }
+
+  #logo {
+    flex: 1;
+  }
+
+  #header-title {
+    flex: 2;
+    text-align: center;
+  }
+}

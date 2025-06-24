@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | ITC Library</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9fbfd;
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 1.2rem;
+      font-weight: 500;
+    }
+    .hero {
+      background: linear-gradient(to right, #003366, #337ab7);
+      color: white;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+    }
+    .section {
+      padding: 3rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+    }
+    .section h2 {
+      color: #003366;
+      margin-bottom: 1rem;
+    }
+    .section-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      align-items: center;
+    }
+    .section-content img {
+      max-width: 400px;
+      border-radius: 10px;
+    }
+    .section-content .text {
+      max-width: 500px;
+      text-align: left;
+    }
+    .section-content .text h3 {
+      color: #003366;
+      margin-bottom: 0.5rem;
+    }
+    .values-slider {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 1rem;
+    }
+    .value {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      flex: 0 0 260px;
+      scroll-snap-align: center;
+      transition: transform 0.3s ease;
+    }
+    .value:hover {
+      transform: scale(1.05);
+    }
+    .values-controls {
+      display: flex;
+      justify-content: space-between;
+      margin: 1rem 0;
+    }
+    .values-controls button {
+      background: #003366;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .cta {
+      background-color: #003366;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+    .cta a {
+      background: white;
+      color: #003366;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 1rem;
+      display: inline-block;
+    }
+    footer {
+      background: #111;
+      color: #bbb;
+      text-align: center;
+      padding: 1.5rem;
+    }
+    @media (max-width: 768px) {
+      .section-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .section-content .text {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="images/itc-logo.png" alt="ITC Logo" style="height: 35px; vertical-align: middle; margin-right: 8px;">
+      <span style="vertical-align: middle;">ITC Online Library</span>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="books.html">Books</a>
+      <a href="course.html">Reviews</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Empowering Minds Through Knowledge</h1>
+    <p>Our mission is to provide students and educators with reliable and accessible academic resources.</p>
+  </section>
+
+  <section class="section">
+    <h2>Our Mission</h2>
+    <div class="section-content">
+      <img src="images/system.png" alt="Our Mission">
+      <div class="text">
+        <h3>Setting a new standard of digital learning</h3>
+        <p>At ITC Library, we believe in the transformative power of education. We provide high-quality academic content including tutorials, books, and past papers to foster academic success for students and support teaching efforts of lecturers.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Our Vision</h2>
+    <div class="section-content">
+      <div class="text">
+        <h3>Bridging gaps with technology</h3>
+        <p>Our vision is to be the leading online academic resource center in the region, empowering learners of all backgrounds through technology-driven access to information and learning tools.</p>
+      </div>
+      <img src="images/think.png" alt="Our Vision">
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Core Values</h2>
+    <div class="values-controls">
+      <button onclick="scrollValues(-1)">←</button>
+      <button onclick="scrollValues(1)">→</button>
+    </div>
+    <div class="values-slider" id="valuesSlider">
+      <div class="value">
+        <h3>🎓 Excellence</h3>
+        <p>We are committed to delivering high-quality academic content.</p>
+      </div>
+      <div class="value">
+        <h3>💡 Innovation</h3>
+        <p>We embrace technology to drive modern education.</p>
+      </div>
+      <div class="value">
+        <h3>📚 Accessibility</h3>
+        <p>Learning resources should be available to everyone, anytime.</p>
+      </div>
+      <div class="value">
+        <h3>🤝 Collaboration</h3>
+        <p>We work with educators and institutions to enrich education.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-content">
+      <img src="images/student-study1.png" alt="Why Choose Us Illustration">
+      <div class="text">
+        <h2>Why Choose ITC Online Library?</h2>
+        <ul>
+          <li>Accessible 24/7</li>
+          <li>Organized by course and department</li>
+          <li>Secure, easy payments and verification</li>
+          <li>Resource contributions by verified lecturers</li>
+          <li>Modern user interface and experience</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Ready to Explore the Library?</h2>
+    <a href="books.html">Browse Books</a>
+  </section>
+
+  <footer>
+    &copy; 2025 ITC Online Library. Crafted by Lenord Siakunkuma 💻
+  </footer>
+
+  <script>
+    function scrollValues(direction) {
+      const slider = document.getElementById('valuesSlider');
+      slider.scrollBy({
+        left: direction * 300,
+        behavior: 'smooth'
+      });
+    }
+  </script>
+
+</body>
+</html>

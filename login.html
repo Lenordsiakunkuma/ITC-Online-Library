@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Secure role-based login portal for ITC Library">
+  <meta name="keywords" content="ITC, library, login, education, Zambia, role-based, student, lecturer">
+  
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/android-chrome-512x512.png">
+  <link rel="manifest" href="images/site.webmanifest">
+
+  <title>Role-Based Login | ITC Library</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary: #2c7ad6;
+      --primary-dark: #1e5a9e;
+      --secondary: #28a745;
+      --accent: #ff6b35;
+      --dark: #2d3748;
+      --light: #f8f9fa;
+      --gray: #718096;
+      --light-gray: #e2e8f0;
+      --danger: #e53e3e;
+      --success: #38a169;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: var(--dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Header Styles */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .logo-icon {
+      color: var(--primary);
+      font-size: 2rem;
+    }
+    
+    .logo-text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    .nav-links a {
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    
+    .nav-links a i {
+      font-size: 0.9rem;
+    }
+    
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--dark);
+      cursor: pointer;
+    }
+    
+    .hero-banner {
+      background: linear-gradient(rgba(44, 122, 214, 0.85), rgba(44, 122, 214, 0.85)), 
+                  url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    
+    .hero-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+    
+    /* Main Content */
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    
+    .login-container {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .login-card {
+      flex: 1;
+      min-width: 300px;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    
+    .login-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    
+    .card-header {
+      background: var(--primary);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    
+    .card-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .card-body {
+      padding: 2rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--dark);
+    }
+    
+    .input-with-icon {
+      position: relative;
+    }
+    
+    .input-with-icon i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray);
+      font-size: 1.1rem;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 0.9rem 1rem 0.9rem 40px;
+      border: 1px solid var(--light-gray);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(44, 122, 214, 0.2);
+    }
+    
+    .password-toggle {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--gray);
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+    
+    .form-check {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-check-input {
+      margin-right: 10px;
+    }
+    
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+      text-decoration: none;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+    
+    .btn-secondary {
+      background: var(--secondary);
+      color: white;
+    }
+    
+    .btn-secondary:hover {
+      background: #218838;
+    }
+    
+    .form-footer {
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+    
+    .form-footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    
+    .form-footer a:hover {
+      text-decoration: underline;
+    }
+    
+    .security-info {
+      background: var(--light);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      border-left: 4px solid var(--primary);
+    }
+    
+    .security-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    .security-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .security-feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .security-feature i {
+      color: var(--success);
+    }
+    
+    /* Role notification */
+    .role-notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateX(120%);
+      transition: transform 0.4s ease;
+    }
+    
+    .role-notification.show {
+      transform: translateX(0);
+    }
+    
+    .role-notification i {
+      font-size: 1.5rem;
+    }
+    
+    .role-notification.student {
+      border-left: 4px solid var(--primary);
+    }
+    
+    .role-notification.student i {
+      color: var(--primary);
+    }
+    
+    .role-notification.lecturer {
+      border-left: 4px solid var(--secondary);
+    }
+    
+    .role-notification.lecturer i {
+      color: var(--secondary);
+    }
+    
+    .role-notification-content {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .role-notification-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    
+    .role-notification-text {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 3rem 1rem 1.5rem;
+      margin-top: auto;
+    }
+    
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    
+    .footer-col h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--primary);
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+    
+    .footer-links a {
+      color: #cbd5e0;
+      text-decoration: none;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .footer-links a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      transition: var(--transition);
+    }
+    
+    .social-links a:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+    
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    
+    .contact-item i {
+      margin-top: 4px;
+      color: var(--primary);
+    }
+    
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 2rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      color: #a0aec0;
+      font-size: 0.9rem;
+    }
+    
+    .developer {
+      color: white;
+      font-weight: 500;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+      
+      .hero-title {
+        font-size: 2rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+      
+      .login-container {
+        flex-direction: column;
+      }
+      
+      .login-card {
+        margin-bottom: 2rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.75rem;
+      }
+      
+      .card-header {
+        padding: 1.25rem;
+      }
+      
+      .card-title {
+        font-size: 1.3rem;
+      }
+      
+      .card-body {
+        padding: 1.5rem;
+      }
+    }
+    
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .login-card {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+    
+    .login-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+    
+    .login-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <i class="fas fa-book-open logo-icon"></i>
+        <span class="logo-text">ITC Library Zone</span>
+      </div>
+      
+      <nav class="nav-links">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="admin-login.html"><i class="fas fa-user-shield"></i> Admin Login</a>
+        <a href="register.html"><i class="fas fa-user-plus"></i> Register</a>
+      </nav>
+      
+      <button class="mobile-toggle" id="mobileToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+  
+  <!-- Hero Banner -->
+  <section class="hero-banner">
+    <h1 class="hero-title">Role-Based Login System</h1>
+    <p class="hero-subtitle">Access your personalized dashboard based on your role</p>
+  </section>
+  
+  <!-- Role Notification -->
+  <div class="role-notification" id="roleNotification">
+    <i class="fas fa-check-circle"></i>
+    <div class="role-notification-content">
+      <div class="role-notification-title">Login Successful!</div>
+      <div class="role-notification-text">Redirecting to your dashboard...</div>
+    </div>
+  </div>
+  
+  <!-- Main Content -->
+  <main>
+    <div class="login-container">
+      <!-- Student Login Card -->
+      <div class="login-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <i class="fas fa-user-graduate"></i>
+          </div>
+          <h2 class="card-title">Student Login</h2>
+          <p>Access your learning resources</p>
+        </div>
+        
+        <div class="card-body">
+          <form id="studentLoginForm">
+            <input type="hidden" name="role" value="student">
+            
+            <div class="form-group">
+              <label for="studentUsername" class="form-label">Username</label>
+              <div class="input-with-icon">
+                <i class="fas fa-user"></i>
+                <input type="text" id="studentUsername" name="username" class="form-input" placeholder="Enter your username" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="studentPassword" class="form-label">Password</label>
+              <div class="input-with-icon">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="studentPassword" name="password" class="form-input" placeholder="Enter your password" required>
+                <button type="button" class="password-toggle" id="studentPasswordToggle">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div class="form-check">
+              <input type="checkbox" id="rememberStudent" class="form-check-input">
+              <label for="rememberStudent">Remember me</label>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+            
+            <div class="form-footer">
+              <p>Forgot password? <a href="#">Recover Account</a></p>
+              <p>Don't have an account? <a href="#">Register Now</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <!-- Lecturer Login Card -->
+      <div class="login-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <i class="fas fa-chalkboard-teacher"></i>
+          </div>
+          <h2 class="card-title">Lecturer Login</h2>
+          <p>Manage your courses and materials</p>
+        </div>
+        
+        <div class="card-body">
+          <form id="lecturerLoginForm">
+            <input type="hidden" name="role" value="lecturer">
+            
+            <div class="form-group">
+              <label for="lecturerUsername" class="form-label">Username</label>
+              <div class="input-with-icon">
+                <i class="fas fa-user"></i>
+                <input type="text" id="lecturerUsername" name="username" class="form-input" placeholder="Enter your username" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="lecturerPassword" class="form-label">Password</label>
+              <div class="input-with-icon">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="lecturerPassword" name="password" class="form-input" placeholder="Enter your password" required>
+                <button type="button" class="password-toggle" id="lecturerPasswordToggle">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div class="form-check">
+              <input type="checkbox" id="rememberLecturer" class="form-check-input">
+              <label for="rememberLecturer">Remember me</label>
+            </div>
+            
+            <button type="submit" class="btn btn-secondary">
+              <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+            
+            <div class="form-footer">
+              <p>Forgot password? <a href="#">Recover Account</a></p>
+              <p>New lecturer? <a href="#">Request Access</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Security Information -->
+    <div class="security-info">
+      <div class="security-title">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Role-Based Access Control</h3>
+      </div>
+      <p>Our system provides secure role-based access to ensure users only see content relevant to their role.</p>
+      
+      <div class="security-features">
+        <div class="security-feature">
+          <i class="fas fa-check-circle"></i>
+          <span>Students: Access learning materials</span>
+        </div>
+        <div class="security-feature">
+          <i class="fas fa-check-circle"></i>
+          <span>Lecturers: Manage courses & resources</span>
+        </div>
+        <div class="security-feature">
+          <i class="fas fa-check-circle"></i>
+          <span>Admins: Full system control</span>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>ITC Library Zone</h3>
+        <p>Providing students and faculty with role-based access to thousands of academic resources.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="#"><i class="fas fa-book"></i> Library Catalog</a></li>
+          <li><a href="#"><i class="fas fa-calendar-alt"></i> Academic Calendar</a></li>
+          <li><a href="#"><i class="fas fa-info-circle"></i> About ITC</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h3>Contact Us</h3>
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Plot 36354, Buyantanshi Road, Lusaka, Zambia</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <span>+0211 247718</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>library@itc.edu.zm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2023 ITC Library Zone. All rights reserved.</p>
+      <p>Developed By: <span class="developer">Lenord Siakunkuma</span></p>
+    </div>
+  </footer>
+  
+  <!-- JavaScript -->
+ 
+<script src="./js/login-handler.js" defer></script>
+</body>
+</html>
