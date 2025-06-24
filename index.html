@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="manifest" href="/images/site.webmanifest">
+
+  <title>Home | ITC Online Library</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/index.css">
+  
+</head>
+<body>
+
+<header class="main-header">
+  <div class="logo">
+    <img src="/images/itc-logo.png" alt="ITC Logo" style="height: 35px; vertical-align: middle; margin-right: 8px;">
+    <span style="vertical-align: middle; font-weight: 600; font-size: 1.5rem;">ITC Online Library</span>
+  </div>
+  <nav class="nav-links">
+    <a href="/">Home</a>
+    <a href="/login.html">Login</a>
+    <a href="/register.html">Register</a>
+    <a href="/books.html">Books</a>
+    <a href="/course.html">Reviews</a>
+    <a href="/about.html">About Us</a>
+    <!-- Admin Panel Link -->
+    <a href="/admin-login.html" class="admin-panel-btn" id="adminPanelBtn" style="display: none;">
+      <i class="fas fa-cog"></i> Admin Panel
+    </a>
+  </nav>
+
+  <!-- Mobile Hamburger -->
+  <details class="hamburger-component">
+    <summary>
+      <img class="hamburger__icon" src="/images/hamburger-icon.png" alt="Menu" style="height: 20px;">
+    </summary>
+    <div class="app-drawer">
+      <ul class="dropdown-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/books.html">Books</a></li>
+        <li><a href="/course.html">Reviews</a></li>
+        <li><a href="/login.html">Log In</a></li>
+        <li><a href="/register.html">Sign Up</a></li>
+        <li><a href="/admin-login.html" id="mobileAdminBtn" style="display: none;">Admin Panel</a></li>
+        <li><a href="#">Advanced Search</a></li>
+      </ul>
+    </div>
+  </details>
+</header>
+
+<section class="hero" id="hero">
+  <h1>Empowering Students and Lecturers<br>through Digital Resources</h1>
+</section>
+
+<!-- Add Admin Post Form (visible only to admins) -->
+<div id="adminPostForm" style="display: none;" class="section">
+  <div class="post-form">
+    <h3><i class="fas fa-plus-circle"></i> Create New Post</h3>
+    <textarea id="postContent" placeholder="What's happening at ITC?"></textarea>
+    
+    <div class="media-preview" id="mediaPreview"></div>
+    
+    <div class="form-actions">
+      <div>
+        <label for="mediaUpload" class="file-upload-btn">
+          <i class="fas fa-image"></i> Add Media
+          <input type="file" id="mediaUpload" accept="image/*,video/*" multiple style="display: none;">
+        </label>
+        <select id="postType">
+          <option value="news">News</option>
+          <option value="notification">Notification</option>
+          <option value="advert">Advert</option>
+          <option value="event">Event</option>
+        </select>
+      </div>
+      <button id="submitPost" class="button">Post</button>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <h2>📢 Announcements & Updates</h2>
+  <div id="postsContainer">
+    <!-- Dynamic posts will be loaded here -->
+    <div class="loading-spinner" style="text-align: center; padding: 20px;">
+      <i class="fas fa-spinner fa-spin"></i> Loading announcements...
+    </div>
+  </div>
+  
+  <button id="loadMoreBtn" class="load-more">Load More Posts</button>
+  <button id="archivedPostsBtn" class="archived-posts-btn">View Archived Posts</button>
+</section>
+
+<section class="section"> 
+  <h2>About Us</h2>
+  <p>
+    Open Library represents a tremendous asset for institutions such as schools,
+    universities, and libraries. By providing free access to an extensive digital collection of books,
+    it supports educational initiatives and research efforts across various fields. Institutions can leverage
+    Open Library’s resources to supplement their own collections, offering students and researchers access to rare and historical texts.
+    Our Online Library gives you access to thousands of academic resources, tutorials, handouts, past papers, and more. Whether you're a student or a lecturer, we’ve got you covered.
+  </p>
+  <button class="about"><a href="/about.html">Read More</a> </button>
+</section>
+
+<section class="section features">
+  <div class="feature">
+    <h3>🎓 For Students</h3>
+    <p>
+      Access study materials, subscribe weekly or monthly, and learn at your own pace.
+    </p>
+  </div>
+  <div class="feature">
+    <h3>👩‍🏫 For Lecturers</h3>
+    <p>
+      Upload tutorials, books, and handouts directly to the platform for your students.
+    </p>
+  </div>
+  <div class="feature">
+    <h3>💳 Easy Payments</h3>
+    <p>Pay for subscriptions via Airtel Money or Zanaco Bank, securely and quickly.</p>
+  </div>
+</section>
+
+<!-- New Course Catalog Section -->
+<section class="section">
+  <h2>📚 Course Catalog</h2>
+  <p>Explore all programs offered at the Industrial Training Center</p>
+  
+  <div class="dept-tabs" id="deptTabs">
+    <!-- Department tabs will be generated here -->
+    <div class="loading-spinner" style="text-align: center; padding: 20px;">
+      <i class="fas fa-spinner fa-spin"></i> Loading departments...
+    </div>
+  </div>
+  
+  <div class="course-grid" id="coursesContainer">
+    <!-- Courses will be loaded here -->
+    <div class="loading-spinner" style="text-align: center; padding: 20px;">
+      <i class="fas fa-spinner fa-spin"></i> Loading courses...
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🏫 School Gallery</h2>
+  <div class="gallery-slider">
+    <div class="gallery-card">
+      <img src="/images/ed.jpg" alt="ITC principal">
+      <h4>Mr Lloyd Mbasela</h4>
+      <p>ITC principal</p>
+    </div>
+
+    <div class="gallery-card">
+      <img src="/images/computer lab.jpg" alt="Computer Lab">
+      <h4>Computer Lab</h4>
+      <p>State-of-the-art facilities</p>
+    </div>
+
+    <div class="gallery-card">
+      <img src="/images/Engineering_Director.jpg" alt="Library">
+      <h4>Campus Library</h4>
+      <p>Extensive resources</p>
+    </div>
+    
+    <div class="gallery-card">
+      <img src="/images/itc.jpg" alt="Workshop">
+      <h4>Engineering Workshop</h4>
+      <p>Practical training</p>
+    </div>
+    
+    <div class="gallery-card">
+      <img src="/images/comp lab.jpg" alt="Graduation">
+      <h4>Graduation Ceremony</h4>
+      <p>Celebrating achievements</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="#hero" class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+  
+  <div class="footer-content">
+    <div class="footer-section footer-about">
+      <h3>About ITC Library</h3>
+      <p>
+        The ITC Online Library provides students and faculty with access to thousands of academic resources, 
+        tutorials, handouts, past papers, and more. We're dedicated to supporting education through technology.
+      </p>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    
+    <div class="footer-section footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="/"><i class="fas fa-chevron-right"></i> Home</a></li>
+        <li><a href="/books.html"><i class="fas fa-chevron-right"></i> Books Catalog</a></li>
+        <li><a href="/course.html"><i class="fas fa-chevron-right"></i> Course Reviews</a></li>
+        <li><a href="/about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+        <li><a href="/login.html"><i class="fas fa-chevron-right"></i> Student Login</a></li>
+        <li><a href="/register.html"><i class="fas fa-chevron-right"></i> Create Account</a></li>
+        <li><a href="/admin-login.html"><i class="fas fa-chevron-right"></i> Admin Login</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section contact-info">
+      <h3>Contact Information</h3>
+      <p>
+        <i class="fas fa-map-marker-alt"></i>
+        <a href="https://www.google.com/maps?q=Plot+36354,+Buyantanshi+Road,+Lusaka" target="_blank">
+          Plot 36354, Buyantanshi Road, P.O. Box 34785, Lusaka
+        </a>
+      </p>
+      <p>
+        <i class="fas fa-phone-alt"></i>
+        <a href="tel:+260211247717">+0211 247717</a> / 
+        <a href="tel:+260211247718">247718</a> / 
+        <a href="tel:+260211244177">244177</a>
+      </p>
+      <p>
+        <i class="fas fa-fax"></i>
+        <a href="tel:+260211243531">+0211 243531</a>
+      </p>
+      <p>
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:itczambia123@gmail.com">itczambia123@gmail.com</a>
+      </p>
+      
+      <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Library Hours</h4>
+      <p><i class="far fa-clock"></i> Monday-Friday: 8:00 AM - 8:00 PM</p>
+      <p><i class="far fa-clock"></i> Saturday: 9:00 AM - 5:00 PM</p>
+      <p><i class="far fa-clock"></i> Sunday: Closed</p>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Newsletter</h3>
+      <p>Subscribe to receive updates on new resources, events, and announcements.</p>
+      <form id="newsletterForm" style="margin-top: 1.5rem;">
+        <div style="display: flex; margin-bottom: 1rem;">
+          <input type="email" id="newsletterEmail" placeholder="Your Email Address" required style="flex: 1; padding: 10px 15px; border: none; border-radius: 4px 0 0 4px;">
+          <button type="submit" style="background: #3498db; color: white; border: none; padding: 0 20px; border-radius: 0 4px 4px 0; cursor: pointer;">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </form>
+      <p style="font-size: 0.85rem;">
+        <i class="fas fa-lock"></i> We respect your privacy. Unsubscribe at any time.
+      </p>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2025 ITC Online Library. Crafted with <i class="fas fa-heart" style="color: #e74c3c;"></i> by <span>Lenord Siakunkuma</span></p>
+  </div>
+</footer>
+
+<script src="/js/home.js"></script>
+</body>
+</html>
