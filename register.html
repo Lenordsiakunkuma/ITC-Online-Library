@@ -13,19 +13,24 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        body {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/ITC2.jpg') no-repeat center center fixed;
+        body, html {
+            width: 100%;
+            overflow-x: hidden;
+            height: 100%;
+        }
+        
+        #background {
+            background: url('images/ITC2.jpg') no-repeat center center fixed;
             background-size: cover;
-            color: white;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
         
         #main-header {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(10px);
-            padding: 15px 30px;
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -33,6 +38,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            width: 100%;
         }
         
         .logo-container {
@@ -47,41 +53,15 @@
         }
         
         .logo-container h1 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             background: linear-gradient(to right, #4361ee, #7209b7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 700;
-        }
-        
-        .desktop-nav {
-            display: flex;
-            gap: 25px;
-        }
-        
-        .desktop-nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 15px;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-        }
-        
-        .desktop-nav a:hover {
-            background: rgba(67, 97, 238, 0.2);
-        }
-        
-        .desktop-nav .login-btn {
-            background: #4361ee;
-        }
-        
-        .desktop-nav .login-btn:hover {
-            background: #3a56d4;
+            white-space: nowrap;
         }
         
         #hamburger {
-            display: none;
             font-size: 1.8rem;
             cursor: pointer;
             color: white;
@@ -94,7 +74,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             flex-direction: column;
@@ -121,16 +101,12 @@
             transform: translateY(-3px);
         }
         
-        #mobile-menu .close-menu {
-            background: #e63946;
-        }
-        
         #slider {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
+            padding: 40px 5%;
             gap: 40px;
             flex: 1;
         }
@@ -145,24 +121,23 @@
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(67, 97, 238, 0.3);
+            color: white;
         }
         
         .welcome-section h2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 20px;
-            background: linear-gradient(to right, #4361ee, #4cc9f0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #4361ee;
             font-weight: 800;
         }
         
-        .welcome-section h2 span {
-            color: #4361ee;
+        .welcome-section h2 b {
+            color: #4cc9f0;
         }
         
         .welcome-section p {
             font-size: 1.1rem;
-            line-height: 1.8;
+            line-height: 1.7;
             margin-bottom: 25px;
             color: #e0e0e0;
         }
@@ -190,30 +165,29 @@
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 40px;
-            min-width: 350px;
-            max-width: 500px;
+            padding: 30px;
+            min-width: 300px;
+            max-width: 450px;
             width: 100%;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(67, 97, 238, 0.3);
+            color: white;
         }
         
         .form-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         
         .form-header h1 {
-            font-size: 2rem;
-            background: linear-gradient(to right, #4361ee, #4cc9f0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 1.8rem;
+            color: #4361ee;
             font-weight: 700;
             margin-bottom: 10px;
         }
         
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
         .form-group label {
@@ -226,7 +200,7 @@
         .form-group input,
         .form-group select {
             width: 100%;
-            padding: 15px;
+            padding: 14px;
             border-radius: 10px;
             border: 1px solid rgba(67, 97, 238, 0.5);
             background: rgba(255, 255, 255, 0.1);
@@ -243,7 +217,7 @@
         
         .submit-btn {
             width: 100%;
-            padding: 16px;
+            padding: 15px;
             border-radius: 10px;
             background: linear-gradient(135deg, #4361ee, #7209b7);
             color: white;
@@ -280,14 +254,15 @@
         #down {
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
-            padding: 40px 20px;
+            padding: 30px 5%;
             text-align: center;
+            color: white;
         }
         
         .social-icons {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             margin: 20px 0;
         }
         
@@ -295,12 +270,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             background: rgba(67, 97, 238, 0.2);
             color: white;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             transition: all 0.3s ease;
         }
         
@@ -313,43 +288,46 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
-            margin: 30px 0;
+            gap: 25px;
+            margin: 25px 0;
         }
         
         .contact-item {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            max-width: 400px;
+            align-items: flex-start;
+            gap: 12px;
+            max-width: 350px;
             text-align: left;
         }
         
         .contact-item i {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: #4361ee;
-            min-width: 40px;
+            min-width: 30px;
+            padding-top: 5px;
         }
         
         .contact-item div {
             flex: 1;
         }
         
+        .contact-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: #4361ee;
+        }
+        
         .footer {
             background: rgba(0, 0, 0, 0.9);
-            padding: 20px;
+            padding: 15px;
             text-align: center;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: #e0e0e0;
         }
         
         @media (max-width: 768px) {
-            .desktop-nav {
-                display: none;
-            }
-            
-            #hamburger {
-                display: block;
+            .logo-container h1 {
+                font-size: 1.3rem;
             }
             
             .welcome-section, .form-container {
@@ -364,150 +342,171 @@
                 flex-direction: column;
                 align-items: center;
             }
+            
+            .welcome-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #slider {
+                padding: 30px 4%;
+            }
+            
+            .welcome-section, .form-container {
+                padding: 25px;
+            }
+            
+            .form-header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .contact-item {
+                gap: 10px;
+            }
+            
+            .contact-item i {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <header id="main-header">
-        <div class="logo-container">
-            <img src="images/itc_log.jpg" alt="ITC Logo">
-            <h1>OPEN LIBRARY</h1>
-        </div>
-        
-        <nav class="desktop-nav">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-            <a href="login.html" class="login-btn">Login</a>
-        </nav>
-        
-        <i class="fas fa-bars" id="hamburger" onclick="toggleMobileMenu()"></i>
-        
-        <div id="mobile-menu">
-            <button onclick="window.location.href='index.html'">Home</button>
-            <button onclick="window.location.href='about.html'">About</button>
-            <button onclick="window.location.href='contact.html'">Contact</button>
-            <button onclick="window.location.href='login.html'">Login</button>
-            <button class="close-menu" onclick="toggleMobileMenu()">Close</button>
-        </div>
-    </header>
-    
-    <div id="slider">
-        <div class="welcome-section">
-            <h2>WELCOME TO ITC OPEN LIBRARY <span>ZONE</span></h2>
-            <p>
-                ITC is a tertiary education institution under the Ministry of Technology and Science. 
-                We offer training in Engineering, Transport & Driver training, Information & Communication Technology. 
-                We also offer tailor-made courses to meet specific industry needs.
-            </p>
-            
-            <div class="features">
-                <div class="feature">
-                    <i class="fas fa-book"></i>
-                    <span>Access thousands of books and resources</span>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-video"></i>
-                    <span>Premium video tutorials and lectures</span>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-download"></i>
-                    <span>Download study materials anytime</span>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-users"></i>
-                    <span>Connect with students and lecturers</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="form-container">
-            <div class="form-header">
-                <h1>CREATE ACCOUNT</h1>
-                <p>Join our learning community today</p>
+    <div id="background">
+        <header id="main-header">
+            <div class="logo-container">
+                <img src="images/system.png" alt="ITC Logo">
+                <h1>OPEN LIBRARY</h1>
             </div>
             
-            <form id="student" action="/api/auth/register" method="POST" onsubmit="return validateForm()">
-                <div class="form-group">
-                    <label for="role">Role</label>
-                    <select name="role" id="role" required>
-                        <option value="">Select Role</option>
-                        <option value="student">Student</option>
-                        <option value="lecturer">Lecturer</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Create a password" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="repassword">Confirm Password</label>
-                    <input type="password" id="repassword" name="repassword" placeholder="Confirm your password" required>
-                </div>
-                
-                <button type="submit" class="submit-btn">REGISTER NOW</button>
-                
-                <div class="login-link">
-                    <p>Already have an account? <a href="login.html">Login here</a></p>
-                </div>
-            </form>
-        </div>
-    </div>
-    
-    <div id="down">
-        <h3>STAY CONNECTED</h3>
-        <div class="social-icons">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="https://wa.me/+260772566890"><i class="fab fa-whatsapp"></i></a>
-        </div>
+            <i class="fas fa-bars" id="hamburger" onclick="toggleMobileMenu()"></i>
+            
+            <div id="mobile-menu">
+                <button onclick="window.location.href='index.html'">Home</button>
+                <button onclick="window.location.href='about.html'">About</button>
+                <button onclick="window.location.href='contact.html'">Contact</button>
+                <button onclick="window.location.href='login.html'">Login</button>
+                <button class="close-menu" onclick="toggleMobileMenu()">Close</button>
+            </div>
+        </header>
         
-        <h2>CONTACT ADDRESS</h2>
-        <div class="contact-info">
-            <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <div>
-                    <h4>ITC LUSAKA ADDRESS</h4>
-                    <p>Plot Number 36354, Buyantashi Road, Heavy Industrial Area, Lusaka</p>
+        <div id="slider">
+            <div class="welcome-section">
+                <h2>WELCOME TO ITC OPEN LIBRARY <b>ZONE</b></h2>
+                <p>
+                    ITC is a tertiary education institution under the Ministry of Technology and Science. 
+                    We offer training in Engineering, Transport & Driver training, Information & Communication Technology. 
+                    We also offer tailor-made courses to meet specific industry needs.
+                </p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <i class="fas fa-book"></i>
+                        <span>Access thousands of books and resources</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-video"></i>
+                        <span>Premium video tutorials and lectures</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-download"></i>
+                        <span>Download study materials anytime</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-users"></i>
+                        <span>Connect with students and lecturers</span>
+                    </div>
                 </div>
             </div>
             
-            <div class="contact-item">
-                <i class="fas fa-phone"></i>
-                <div>
-                    <h4>PHONE</h4>
-                    <p>+260 772 566 890</p>
+            <div class="form-container">
+                <div class="form-header">
+                    <h1>CREATE ACCOUNT</h1>
+                    <p>Join our learning community today</p>
                 </div>
+                
+                <form id="student" action="/api/auth/register.php" method="POST">
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <select name="role" id="role" required>
+                            <option value="">Select Role</option>
+                            <option value="student">Student</option>
+                            <option value="lecturer">Lecturer</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Create a password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="repassword">Confirm Password</label>
+                        <input type="password" id="repassword" name="repassword" placeholder="Confirm your password" required>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">REGISTER NOW</button>
+                    
+                    <div class="login-link">
+                        <p>Already have an account? <a href="login.html">Login here</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div id="down">
+            <h3>STAY CONNECTED</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://wa.me/+260772566890"><i class="fab fa-whatsapp"></i></a>
             </div>
             
-            <div class="contact-item">
-                <i class="fas fa-envelope"></i>
-                <div>
-                    <h4>EMAIL</h4>
-                    <p>reynardsiakunkuma@gmail.com</p>
+            <h2>CONTACT ADDRESS</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>ITC LUSAKA ADDRESS</h4>
+                        <p>Plot Number 36354, Buyantashi Road, Heavy Industrial Area, Lusaka</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h4>PHONE</h4>
+                        <p>+260 772 566 890</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>EMAIL</h4>
+                        <p>reynardsiakunkuma@gmail.com</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="footer">
-        <footer>
-            &copy; 2025 Online Library | Built by Lenord Siakunkuma 
-        </footer>
+        
+        <div class="footer">
+            <footer>
+                &copy; 2025 Online Library | Built by Lenord Siakunkuma 
+            </footer>
+        </div>
     </div>
 
     <script>
@@ -537,6 +536,13 @@
                 !menu.contains(e.target) && 
                 e.target !== hamburger) {
                 menu.style.display = 'none';
+            }
+        });
+        
+        // Prevent horizontal scrolling
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= document.documentElement.clientWidth) {
+                document.documentElement.scrollLeft = 0;
             }
         });
     </script>
