@@ -3,271 +3,1091 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-  <link rel="manifest" href="/images/site.webmanifest">
-
   <title>Home | ITC Online Library</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="/index.css">
   
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS Libraries -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --light: #f8f9fa;
+      --dark: #1a252f;
+      --success: #2ecc71;
+      --warning: #f39c12;
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      color: var(--dark);
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(52, 152, 219, 0.05)" stroke-width="1"/></svg>');
+      z-index: -1;
+      opacity: 0.3;
+    }
+    
+    /* Header Styles */
+    .main-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+    }
+    
+    .main-header.scrolled {
+      padding: 0.7rem 5%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary);
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .logo img {
+      height: 40px;
+      margin-right: 12px;
+      transition: var(--transition);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: var(--transition);
+    }
+    
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--secondary);
+      transition: var(--transition);
+    }
+    
+    .nav-links a:hover {
+      color: var(--secondary);
+    }
+    
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    
+    .admin-panel-btn {
+      background: var(--secondary);
+      color: white !important;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      transition: var(--transition);
+    }
+    
+    .admin-panel-btn:hover {
+      background: #2980b9;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+    }
+    
+    .admin-panel-btn::after {
+      display: none;
+    }
+    
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 10%;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(rgba(26, 37, 47, 0.8), rgba(26, 37, 47, 0.9));
+      color: white;
+    }
+    
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    .hero p {
+      font-size: 1.5rem;
+      max-width: 800px;
+      margin-bottom: 2.5rem;
+      animation: fadeInUp 1.2s ease-out;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      animation: fadeInUp 1.4s ease-out;
+    }
+    
+    .btn {
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      border: none;
+      font-size: 1.1rem;
+    }
+    
+    .btn-primary {
+      background: var(--secondary);
+      color: white;
+      box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+    
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(52, 152, 219, 0.5);
+    }
+    
+    /* Section Styling */
+    .section {
+      padding: 6rem 5%;
+      position: relative;
+    }
+    
+    .section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 2px;
+    }
+    
+    .section-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 4rem;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .section-header p {
+      font-size: 1.2rem;
+      color: #555;
+    }
+    
+    /* Floating Elements */
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    /* Features Section */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .feature-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--secondary);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      color: var(--secondary);
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+    
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .feature-card p {
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    /* Gallery Section */
+    .gallery-slider {
+      display: flex;
+      gap: 2rem;
+      overflow-x: auto;
+      padding: 1rem 0 2rem;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .gallery-slider::-webkit-scrollbar {
+      height: 8px;
+    }
+    
+    .gallery-slider::-webkit-scrollbar-thumb {
+      background: var(--secondary);
+      border-radius: 4px;
+    }
+    
+    .gallery-card {
+      flex: 0 0 calc(33.333% - 1.5rem);
+      scroll-snap-align: start;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+      transition: var(--transition);
+    }
+    
+    .gallery-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    .gallery-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+      transition: var(--transition);
+    }
+    
+    .gallery-card:hover img {
+      transform: scale(1.05);
+    }
+    
+    .gallery-content {
+      padding: 1.5rem;
+      background: white;
+    }
+    
+    .gallery-content h4 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Stats Section */
+    .stats {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+    }
+    
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .stat-item {
+      padding: 2rem;
+    }
+    
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--secondary);
+    }
+    
+    .stat-label {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    
+    /* Testimonials */
+    .testimonials {
+      background: #f0f4f8;
+    }
+    
+    .testimonial-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+    }
+    
+    .testimonial-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      margin: 2rem;
+      position: relative;
+    }
+    
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      font-size: 5rem;
+      color: var(--secondary);
+      opacity: 0.2;
+      font-family: Georgia, serif;
+    }
+    
+    .testimonial-content {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+    }
+    
+    .author-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 1rem;
+      border: 3px solid var(--secondary);
+    }
+    
+    .author-info h4 {
+      font-size: 1.2rem;
+      margin-bottom: 0.2rem;
+    }
+    
+    .author-info p {
+      color: #777;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding-top: 5rem;
+      position: relative;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+    
+    .footer-section {
+      margin-bottom: 2rem;
+    }
+    
+    .footer-section h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    
+    .footer-section h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--secondary);
+    }
+    
+    .footer-section p {
+      margin-bottom: 1rem;
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.8rem;
+      list-style: none;
+    }
+    
+    .footer-links a {
+      color: #ddd;
+      text-decoration: none;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    
+    .footer-links a:hover {
+      color: var(--secondary);
+      transform: translateX(5px);
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: white;
+      transition: var(--transition);
+    }
+    
+    .social-links a:hover {
+      background: var(--secondary);
+      transform: translateY(-5px);
+    }
+    
+    .contact-info p {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+    
+    .contact-info i {
+      color: var(--secondary);
+      margin-top: 5px;
+    }
+    
+    .newsletter-form {
+      display: flex;
+      margin-top: 1.5rem;
+    }
+    
+    .newsletter-form input {
+      flex: 1;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 4px 0 0 4px;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .newsletter-form button {
+      background: var(--secondary);
+      color: white;
+      border: none;
+      padding: 0 1.5rem;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .newsletter-form button:hover {
+      background: #2980b9;
+    }
+    
+    .footer-bottom {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 1.5rem 0;
+      text-align: center;
+    }
+    
+    .footer-bottom p {
+      opacity: 0.7;
+    }
+    
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--secondary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+      transition: var(--transition);
+      z-index: 100;
+      animation: pulse 2s infinite;
+    }
+    
+    .back-to-top:hover {
+      transform: translateY(-5px);
+      background: #2980b9;
+      box-shadow: 0 8px 20px rgba(52, 152, 219, 0.6);
+    }
+    
+    /* Animations */
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 15px rgba(52, 152, 219, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+      }
+    }
+    
+    /* Particles Background */
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      
+      .gallery-card {
+        flex: 0 0 calc(50% - 1rem);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+      
+      .hero p {
+        font-size: 1.2rem;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+      }
+      
+      .gallery-card {
+        flex: 0 0 calc(100% - 1rem);
+      }
+      
+      .section {
+        padding: 4rem 5%;
+      }
+    }
+    
+    @media (min-width: 769px) {
+      .hamburger-component {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<header class="main-header">
-  <div class="logo">
-    <img src="/images/itc-logo.png" alt="ITC Logo" style="height: 35px; vertical-align: middle; margin-right: 8px;">
-    <span style="vertical-align: middle; font-weight: 600; font-size: 1.5rem;">ITC Online Library</span>
-  </div>
-  <nav class="nav-links">
-    <a href="/">Home</a>
-    <a href="/login.html">Login</a>
-    <a href="/register.html">Register</a>
-    <a href="/books.html">Books</a>
-    <a href="/course.html">Reviews</a>
-    <a href="/about.html">About Us</a>
-    <!-- Admin Panel Link -->
-    <a href="/admin-login.html" class="admin-panel-btn" id="adminPanelBtn" style="display: none;">
-      <i class="fas fa-cog"></i> Admin Panel
-    </a>
-  </nav>
-
-  <!-- Mobile Hamburger -->
-  <details class="hamburger-component">
-    <summary>
-      <img class="hamburger__icon" src="/images/hamburger-icon.png" alt="Menu" style="height: 20px;">
-    </summary>
-    <div class="app-drawer">
-      <ul class="dropdown-menu">
-        <li><a href="/">Home</a></li>
-        <li><a href="/books.html">Books</a></li>
-        <li><a href="/course.html">Reviews</a></li>
-        <li><a href="/login.html">Log In</a></li>
-        <li><a href="/register.html">Sign Up</a></li>
-        <li><a href="/admin-login.html" id="mobileAdminBtn" style="display: none;">Admin Panel</a></li>
-        <li><a href="#">Advanced Search</a></li>
-      </ul>
+  <!-- Particles Background -->
+  <div id="particles-js"></div>
+  
+  <!-- Header -->
+  <header class="main-header">
+    <div class="logo floating">
+      <img src="https://via.placeholder.com/40/3498db/ffffff?text=ITC" alt="ITC Logo">
+      <span>ITC Online Library</span>
     </div>
-  </details>
-</header>
+    <nav class="nav-links">
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
+      <a href="books.html">Books</a>
+      <a href="course.html">Reviews</a>
+      <a href="about.html">About Us</a>
+      <a href="admin-login.html" class="admin-panel-btn">
+        <i class="fas fa-cog"></i> Admin Panel
+      </a>
+    </nav>
+  </header>
 
-<section class="hero" id="hero">
-  <h1>Empowering Students and Lecturers<br>through Digital Resources</h1>
-</section>
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <h1>Empowering Students and Lecturers through Digital Resources</h1>
+    <p>Access thousands of academic resources, tutorials, handouts, and past papers in one place</p>
+    <div class="hero-buttons">
+      <a href="register.html" class="btn btn-primary">Get Started</a>
+      <a href="about.html" class="btn btn-secondary">Learn More</a>
+    </div>
+  </section>
 
-<!-- Add Admin Post Form (visible only to admins) -->
-<div id="adminPostForm" style="display: none;" class="section">
-  <div class="post-form">
-    <h3><i class="fas fa-plus-circle"></i> Create New Post</h3>
-    <textarea id="postContent" placeholder="What's happening at ITC?"></textarea>
-    
-    <div class="media-preview" id="mediaPreview"></div>
-    
-    <div class="form-actions">
-      <div>
-        <label for="mediaUpload" class="file-upload-btn">
-          <i class="fas fa-image"></i> Add Media
-          <input type="file" id="mediaUpload" accept="image/*,video/*" multiple style="display: none;">
-        </label>
-        <select id="postType">
-          <option value="news">News</option>
-          <option value="notification">Notification</option>
-          <option value="advert">Advert</option>
-          <option value="event">Event</option>
-        </select>
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="stats-container">
+      <div class="stat-item" data-aos="fade-up">
+        <div class="stat-number">5,000+</div>
+        <div class="stat-label">Academic Resources</div>
       </div>
-      <button id="submitPost" class="button">Post</button>
+      <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="stat-number">1,200+</div>
+        <div class="stat-label">Registered Students</div>
+      </div>
+      <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Expert Lecturers</div>
+      </div>
+      <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Access Anywhere</div>
+      </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<section class="section">
-  <h2>📢 Announcements & Updates</h2>
-  <div id="postsContainer">
-    <!-- Dynamic posts will be loaded here -->
-    <div class="loading-spinner" style="text-align: center; padding: 20px;">
-      <i class="fas fa-spinner fa-spin"></i> Loading announcements...
-    </div>
-  </div>
-  
-  <button id="loadMoreBtn" class="load-more">Load More Posts</button>
-  <button id="archivedPostsBtn" class="archived-posts-btn">View Archived Posts</button>
-</section>
-
-<section class="section"> 
-  <h2>About Us</h2>
-  <p>
-    Open Library represents a tremendous asset for institutions such as schools,
-    universities, and libraries. By providing free access to an extensive digital collection of books,
-    it supports educational initiatives and research efforts across various fields. Institutions can leverage
-    Open Library’s resources to supplement their own collections, offering students and researchers access to rare and historical texts.
-    Our Online Library gives you access to thousands of academic resources, tutorials, handouts, past papers, and more. Whether you're a student or a lecturer, we’ve got you covered.
-  </p>
-  <button class="about"><a href="/about.html">Read More</a> </button>
-</section>
-
-<section class="section features">
-  <div class="feature">
-    <h3>🎓 For Students</h3>
-    <p>
-      Access study materials, subscribe weekly or monthly, and learn at your own pace.
-    </p>
-  </div>
-  <div class="feature">
-    <h3>👩‍🏫 For Lecturers</h3>
-    <p>
-      Upload tutorials, books, and handouts directly to the platform for your students.
-    </p>
-  </div>
-  <div class="feature">
-    <h3>💳 Easy Payments</h3>
-    <p>Pay for subscriptions via Airtel Money or Zanaco Bank, securely and quickly.</p>
-  </div>
-</section>
-
-<!-- New Course Catalog Section -->
-<section class="section">
-  <h2>📚 Course Catalog</h2>
-  <p>Explore all programs offered at the Industrial Training Center</p>
-  
-  <div class="dept-tabs" id="deptTabs">
-    <!-- Department tabs will be generated here -->
-    <div class="loading-spinner" style="text-align: center; padding: 20px;">
-      <i class="fas fa-spinner fa-spin"></i> Loading departments...
-    </div>
-  </div>
-  
-  <div class="course-grid" id="coursesContainer">
-    <!-- Courses will be loaded here -->
-    <div class="loading-spinner" style="text-align: center; padding: 20px;">
-      <i class="fas fa-spinner fa-spin"></i> Loading courses...
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <h2>🏫 School Gallery</h2>
-  <div class="gallery-slider">
-    <div class="gallery-card">
-      <img src="/images/ed.jpg" alt="ITC principal">
-      <h4>Mr Lloyd Mbasela</h4>
-      <p>ITC principal</p>
-    </div>
-
-    <div class="gallery-card">
-      <img src="/images/computer lab.jpg" alt="Computer Lab">
-      <h4>Computer Lab</h4>
-      <p>State-of-the-art facilities</p>
-    </div>
-
-    <div class="gallery-card">
-      <img src="/images/Engineering_Director.jpg" alt="Library">
-      <h4>Campus Library</h4>
-      <p>Extensive resources</p>
+  <!-- Features Section -->
+  <section class="section">
+    <div class="section-header" data-aos="fade-up">
+      <h2>Why Choose ITC Library</h2>
+      <p>We provide comprehensive digital resources for both students and lecturers</p>
     </div>
     
-    <div class="gallery-card">
-      <img src="/images/itc.jpg" alt="Workshop">
-      <h4>Engineering Workshop</h4>
-      <p>Practical training</p>
+    <div class="features">
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="feature-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h3>For Students</h3>
+        <p>Access study materials, subscribe weekly or monthly, and learn at your own pace with our extensive collection of resources.</p>
+      </div>
+      
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="feature-icon">
+          <i class="fas fa-chalkboard-teacher"></i>
+        </div>
+        <h3>For Lecturers</h3>
+        <p>Upload tutorials, books, and handouts directly to the platform for your students with our easy-to-use content management system.</p>
+      </div>
+      
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="feature-icon">
+          <i class="fas fa-credit-card"></i>
+        </div>
+        <h3>Easy Payments</h3>
+        <p>Pay for subscriptions via Airtel Money or Zanaco Bank, securely and quickly with multiple payment options.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Course Catalog -->
+  <section class="section" style="background: #f8f9fa;">
+    <div class="section-header" data-aos="fade-up">
+      <h2>Featured Courses</h2>
+      <p>Explore our most popular academic programs</p>
     </div>
     
-    <div class="gallery-card">
-      <img src="/images/comp lab.jpg" alt="Graduation">
-      <h4>Graduation Ceremony</h4>
-      <p>Celebrating achievements</p>
+    <div class="features">
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="feature-icon">
+          <i class="fas fa-laptop-code"></i>
+        </div>
+        <h3>Computer Science</h3>
+        <p>Comprehensive computer science curriculum covering programming, algorithms, and system design.</p>
+        <a href="#" class="btn btn-primary" style="margin-top: 1.5rem;">Explore Course</a>
+      </div>
+      
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="feature-icon">
+          <i class="fas fa-cogs"></i>
+        </div>
+        <h3>Mechanical Engineering</h3>
+        <p>Learn mechanical design, thermodynamics, and manufacturing processes from industry experts.</p>
+        <a href="#" class="btn btn-primary" style="margin-top: 1.5rem;">Explore Course</a>
+      </div>
+      
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="feature-icon">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <h3>Electrical Engineering</h3>
+        <p>Master electrical circuits, power systems, and electronics with our practical-focused curriculum.</p>
+        <a href="#" class="btn btn-primary" style="margin-top: 1.5rem;">Explore Course</a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
+  <!-- Gallery Section -->
+  <section class="section">
+    <div class="section-header" data-aos="fade-up">
+      <h2>Campus Gallery</h2>
+      <p>Explore our state-of-the-art facilities</p>
+    </div>
+    
+    <div class="gallery-slider">
+      <div class="gallery-card" data-aos="fade-right">
+        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="ITC Campus">
+        <div class="gallery-content">
+          <h4>Main Campus</h4>
+          <p>Our modern campus with advanced facilities</p>
+        </div>
+      </div>
+      
+      <div class="gallery-card" data-aos="fade-up">
+        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Library">
+        <div class="gallery-content">
+          <h4>Campus Library</h4>
+          <p>Extensive resources and quiet study areas</p>
+        </div>
+      </div>
+      
+      <div class="gallery-card" data-aos="fade-left">
+        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Computer Lab">
+        <div class="gallery-content">
+          <h4>Computer Lab</h4>
+          <p>State-of-the-art computing facilities</p>
+        </div>
+      </div>
+      
+      <div class="gallery-card" data-aos="fade-right">
+        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Workshop">
+        <div class="gallery-content">
+          <h4>Engineering Workshop</h4>
+          <p>Practical training facilities</p>
+        </div>
+      </div>
+      
+      <div class="gallery-card" data-aos="fade-left">
+        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Graduation">
+        <div class="gallery-content">
+          <h4>Graduation Ceremony</h4>
+          <p>Celebrating student achievements</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section testimonials">
+    <div class="section-header" data-aos="fade-up">
+      <h2>What Our Students Say</h2>
+      <p>Hear from our community of learners</p>
+    </div>
+    
+    <div class="testimonial-container">
+      <div class="testimonial-card" data-aos="fade-up">
+        <div class="testimonial-content">
+          The ITC Online Library has transformed how I study. The resources are comprehensive and well-organized, making it easy to find exactly what I need for my coursework.
+        </div>
+        <div class="testimonial-author">
+          <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Student" class="author-img">
+          <div class="author-info">
+            <h4>Sarah Chanda</h4>
+            <p>Computer Science Student</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="testimonial-content">
+          As a lecturer, I find the platform incredibly useful for sharing materials with my students. The interface is intuitive and the support team is always responsive to feedback.
+        </div>
+        <div class="testimonial-author">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Lecturer" class="author-img">
+          <div class="author-info">
+            <h4>Dr. Thomas Banda</h4>
+            <p>Engineering Lecturer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="section" style="background: linear-gradient(135deg, var(--secondary) 0%, #1a5276 100%); color: white; text-align: center;">
+    <div class="section-header">
+      <h2>Ready to Get Started?</h2>
+      <p>Join thousands of students and lecturers using our platform</p>
+    </div>
+    <div data-aos="fade-up">
+      <a href="register.html" class="btn btn-primary" style="background: white; color: var(--secondary);">Create Your Account</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section footer-about">
+        <h3>About ITC Library</h3>
+        <p>
+          The ITC Online Library provides students and faculty with access to thousands of academic resources, 
+          tutorials, handouts, past papers, and more. We're dedicated to supporting education through technology.
+        </p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-section footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="/books.html"><i class="fas fa-chevron-right"></i> Books Catalog</a></li>
+          <li><a href="/course.html"><i class="fas fa-chevron-right"></i> Course Reviews</a></li>
+          <li><a href="/about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="/login.html"><i class="fas fa-chevron-right"></i> Student Login</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section contact-info">
+        <h3>Contact Information</h3>
+        <p>
+          <i class="fas fa-map-marker-alt"></i>
+          Plot 36354, Buyantanshi Road, Lusaka
+        </p>
+        <p>
+          <i class="fas fa-phone-alt"></i>
+          +0211 247717 / 247718 / 244177
+        </p>
+        <p>
+          <i class="fas fa-envelope"></i>
+          itczambia123@gmail.com
+        </p>
+        
+        <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Library Hours</h4>
+        <p><i class="far fa-clock"></i> Monday-Friday: 8:00 AM - 8:00 PM</p>
+        <p><i class="far fa-clock"></i> Saturday: 9:00 AM - 5:00 PM</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Newsletter</h3>
+        <p>Subscribe to receive updates on new resources, events, and announcements.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Your Email Address" required>
+          <button type="submit"><i class="fas fa-paper-plane"></i></button>
+        </form>
+        <p style="font-size: 0.85rem; margin-top: 0.5rem;">
+          <i class="fas fa-lock"></i> We respect your privacy. Unsubscribe at any time.
+        </p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 ITC Online Library. Crafted with <i class="fas fa-heart" style="color: #e74c3c;"></i> by Lenord Siakunkuma</p>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
   <a href="#hero" class="back-to-top">
     <i class="fas fa-arrow-up"></i>
   </a>
-  
-  <div class="footer-content">
-    <div class="footer-section footer-about">
-      <h3>About ITC Library</h3>
-      <p>
-        The ITC Online Library provides students and faculty with access to thousands of academic resources, 
-        tutorials, handouts, past papers, and more. We're dedicated to supporting education through technology.
-      </p>
-      <div class="social-links">
-        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-      </div>
-    </div>
-    
-    <div class="footer-section footer-links">
-      <h3>Quick Links</h3>
-      <ul>
-        <li><a href="/"><i class="fas fa-chevron-right"></i> Home</a></li>
-        <li><a href="/books.html"><i class="fas fa-chevron-right"></i> Books Catalog</a></li>
-        <li><a href="/course.html"><i class="fas fa-chevron-right"></i> Course Reviews</a></li>
-        <li><a href="/about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
-        <li><a href="/login.html"><i class="fas fa-chevron-right"></i> Student Login</a></li>
-        <li><a href="/register.html"><i class="fas fa-chevron-right"></i> Create Account</a></li>
-        <li><a href="/admin-login.html"><i class="fas fa-chevron-right"></i> Admin Login</a></li>
-      </ul>
-    </div>
-    
-    <div class="footer-section contact-info">
-      <h3>Contact Information</h3>
-      <p>
-        <i class="fas fa-map-marker-alt"></i>
-        <a href="https://www.google.com/maps?q=Plot+36354,+Buyantanshi+Road,+Lusaka" target="_blank">
-          Plot 36354, Buyantanshi Road, P.O. Box 34785, Lusaka
-        </a>
-      </p>
-      <p>
-        <i class="fas fa-phone-alt"></i>
-        <a href="tel:+260211247717">+0211 247717</a> / 
-        <a href="tel:+260211247718">247718</a> / 
-        <a href="tel:+260211244177">244177</a>
-      </p>
-      <p>
-        <i class="fas fa-fax"></i>
-        <a href="tel:+260211243531">+0211 243531</a>
-      </p>
-      <p>
-        <i class="fas fa-envelope"></i>
-        <a href="mailto:itczambia123@gmail.com">itczambia123@gmail.com</a>
-      </p>
-      
-      <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Library Hours</h4>
-      <p><i class="far fa-clock"></i> Monday-Friday: 8:00 AM - 8:00 PM</p>
-      <p><i class="far fa-clock"></i> Saturday: 9:00 AM - 5:00 PM</p>
-      <p><i class="far fa-clock"></i> Sunday: Closed</p>
-    </div>
-    
-    <div class="footer-section">
-      <h3>Newsletter</h3>
-      <p>Subscribe to receive updates on new resources, events, and announcements.</p>
-      <form id="newsletterForm" style="margin-top: 1.5rem;">
-        <div style="display: flex; margin-bottom: 1rem;">
-          <input type="email" id="newsletterEmail" placeholder="Your Email Address" required style="flex: 1; padding: 10px 15px; border: none; border-radius: 4px 0 0 4px;">
-          <button type="submit" style="background: #3498db; color: white; border: none; padding: 0 20px; border-radius: 0 4px 4px 0; cursor: pointer;">
-            <i class="fas fa-paper-plane"></i>
-          </button>
-        </div>
-      </form>
-      <p style="font-size: 0.85rem;">
-        <i class="fas fa-lock"></i> We respect your privacy. Unsubscribe at any time.
-      </p>
-    </div>
-  </div>
-  
-  <div class="footer-bottom">
-    <p>&copy; 2025 ITC Online Library. Crafted with <i class="fas fa-heart" style="color: #e74c3c;"></i> by <span>Lenord Siakunkuma</span></p>
-  </div>
-</footer>
 
-<script src="/js/home.js"></script>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-in-out'
+    });
+    
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('.main-header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Initialize particles background
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#3498db" },
+        shape: { type: "circle", stroke: { width: 0, color: "#000000" } },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#3498db",
+          opacity: 0.2,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: true,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        }
+      },
+      retina_detect: true
+    });
+    
+    // Auto-scroll for gallery
+    let galleryScrollInterval;
+    function startGalleryScroll() {
+      const gallery = document.querySelector('.gallery-slider');
+      if (!gallery) return;
+      
+      galleryScrollInterval = setInterval(() => {
+        gallery.scrollBy({ left: 300, behavior: 'smooth' });
+        
+        // Reset to start when reaching the end
+        if (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 50) {
+          setTimeout(() => {
+            gallery.scrollTo({ left: 0, behavior: 'smooth' });
+          }, 1000);
+        }
+      }, 3000);
+    }
+    
+    // Pause gallery scroll on hover
+    document.querySelector('.gallery-slider')?.addEventListener('mouseenter', () => {
+      clearInterval(galleryScrollInterval);
+    });
+    
+    document.querySelector('.gallery-slider')?.addEventListener('mouseleave', () => {
+      startGalleryScroll();
+    });
+    
+    // Start gallery scroll on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      startGalleryScroll();
+    });
+  </script>
 </body>
 </html>
