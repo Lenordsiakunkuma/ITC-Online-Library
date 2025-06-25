@@ -137,7 +137,7 @@
       display: none;
     }
     
-    /* Hero Section */
+    /* Enhanced Hero Section with Slider */
     .hero {
       height: 100vh;
       display: flex;
@@ -148,8 +148,49 @@
       padding: 0 10%;
       position: relative;
       overflow: hidden;
-      background: linear-gradient(rgba(26, 37, 47, 0.8), rgba(26, 37, 47, 0.9));
       color: white;
+    }
+    
+    .hero-slides {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    
+    .hero-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+    
+    .hero-slide.active {
+      opacity: 1;
+    }
+    
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(26, 37, 47, 0.8), rgba(26, 37, 47, 0.9));
+      z-index: -1;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
     }
     
     .hero h1 {
@@ -170,7 +211,63 @@
     .hero-buttons {
       display: flex;
       gap: 1rem;
+      justify-content: center;
       animation: fadeInUp 1.4s ease-out;
+    }
+    
+    .slider-controls {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+    
+    .slider-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .slider-dot.active {
+      background: var(--secondary);
+      transform: scale(1.2);
+    }
+    
+    .slider-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 10;
+    }
+    
+    .slider-arrow {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+      backdrop-filter: blur(5px);
+    }
+    
+    .slider-arrow:hover {
+      background: var(--secondary);
+      transform: scale(1.1);
     }
     
     .btn {
@@ -696,6 +793,12 @@
       .section {
         padding: 4rem 5%;
       }
+      
+      .slider-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
     }
     
     @media (min-width: 769px) {
@@ -712,7 +815,7 @@
   <!-- Header -->
   <header class="main-header">
     <div class="logo floating">
-      <img src="https://via.placeholder.com/40/3498db/ffffff?text=ITC" alt="ITC Logo">
+      <img src="images/itc-logo.png" alt="ITC Logo">
       <span>ITC Online Library</span>
     </div>
     <nav class="nav-links">
@@ -727,13 +830,34 @@
     </nav>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Enhanced Hero Section with Slider -->
   <section class="hero" id="hero">
-    <h1>Empowering Students and Lecturers through Digital Resources</h1>
-    <p>Access thousands of academic resources, tutorials, handouts, and past papers in one place</p>
-    <div class="hero-buttons">
-      <a href="register.html" class="btn btn-primary">Get Started</a>
-      <a href="about.html" class="btn btn-secondary">Learn More</a>
+    <div class="hero-slides">
+      <!-- Slides will be inserted here by JavaScript -->
+    </div>
+    
+    <div class="hero-content">
+      <h1>Empowering Students and Lecturers through Digital Resources</h1>
+      <p>Access thousands of academic resources, tutorials, handouts, and past papers in one place</p>
+      <div class="hero-buttons">
+        <a href="register.html" class="btn btn-primary">Get Started</a>
+        <a href="about.html" class="btn btn-secondary">Learn More</a>
+      </div>
+    </div>
+    
+    <!-- Slider Navigation -->
+    <div class="slider-nav">
+      <div class="slider-arrow prev">
+        <i class="fas fa-chevron-left"></i>
+      </div>
+      <div class="slider-arrow next">
+        <i class="fas fa-chevron-right"></i>
+      </div>
+    </div>
+    
+    <!-- Slider Dots -->
+    <div class="slider-controls">
+      <!-- Dots will be inserted here by JavaScript -->
     </div>
   </section>
 
@@ -847,7 +971,7 @@
       </div>
       
       <div class="gallery-card" data-aos="fade-up">
-        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Library">
+        <img src="images/graduation.jpg" alt="Library">
         <div class="gallery-content">
           <h4>Campus Library</h4>
           <p>Extensive resources and quiet study areas</p>
@@ -855,7 +979,7 @@
       </div>
       
       <div class="gallery-card" data-aos="fade-left">
-        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Computer Lab">
+        <img src="images/computer lab.jpg" alt="Computer Lab">
         <div class="gallery-content">
           <h4>Computer Lab</h4>
           <p>State-of-the-art computing facilities</p>
@@ -863,7 +987,7 @@
       </div>
       
       <div class="gallery-card" data-aos="fade-right">
-        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Workshop">
+        <img src="images/ITC2.jpg" alt="Workshop">
         <div class="gallery-content">
           <h4>Engineering Workshop</h4>
           <p>Practical training facilities</p>
@@ -871,7 +995,7 @@
       </div>
       
       <div class="gallery-card" data-aos="fade-left">
-        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Graduation">
+        <img src="images/graduation2.jpg" alt="Graduation">
         <div class="gallery-content">
           <h4>Graduation Ceremony</h4>
           <p>Celebrating student achievements</p>
@@ -1056,6 +1180,88 @@
       },
       retina_detect: true
     });
+    
+    // Hero Image Slider
+    const hero = document.getElementById('hero');
+    if (hero) {
+      const images = [
+        'images/itc.jpg',
+        'images/computer lab.jpg',
+        'images/Transport_2.jpg',
+        'images/Transport_4.jpg',
+        'images/ed.jpg'
+      ];
+      
+      let index = 0;
+      const slidesContainer = document.querySelector('.hero-slides');
+      const dotsContainer = document.querySelector('.slider-controls');
+      const prevBtn = document.querySelector('.slider-arrow.prev');
+      const nextBtn = document.querySelector('.slider-arrow.next');
+
+      // Create slides and dots
+      images.forEach((src, i) => {
+        // Create slide
+        const slide = document.createElement('div');
+        slide.className = 'hero-slide';
+        slide.style.backgroundImage = `url('${src}')`;
+        if (i === 0) slide.classList.add('active');
+        slidesContainer.appendChild(slide);
+        
+        // Create dot
+        const dot = document.createElement('div');
+        dot.className = `slider-dot ${i === 0 ? 'active' : ''}`;
+        dot.dataset.index = i;
+        dotsContainer.appendChild(dot);
+      });
+      
+      const slides = document.querySelectorAll('.hero-slide');
+      const dots = document.querySelectorAll('.slider-dot');
+      
+      // Auto-rotate
+      const sliderInterval = setInterval(showNextSlide, 4000);
+      
+      function showSlide(idx) {
+        // Remove active class from all slides and dots
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        // Add active class to current slide and dot
+        slides[idx].classList.add('active');
+        dots[idx].classList.add('active');
+        
+        index = idx;
+      }
+      
+      function showNextSlide() {
+        const nextIndex = (index + 1) % images.length;
+        showSlide(nextIndex);
+      }
+      
+      function showPrevSlide() {
+        const prevIndex = (index - 1 + images.length) % images.length;
+        showSlide(prevIndex);
+      }
+      
+      // Next button
+      nextBtn.addEventListener('click', () => {
+        clearInterval(sliderInterval);
+        showNextSlide();
+      });
+      
+      // Previous button
+      prevBtn.addEventListener('click', () => {
+        clearInterval(sliderInterval);
+        showPrevSlide();
+      });
+      
+      // Dot navigation
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          clearInterval(sliderInterval);
+          showSlide(parseInt(dot.dataset.index));
+        });
+      });
+    }
     
     // Auto-scroll for gallery
     let galleryScrollInterval;
