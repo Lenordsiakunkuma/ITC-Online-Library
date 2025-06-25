@@ -4,244 +4,696 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us | ITC Library</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --light: #f8f9fa;
+      --dark: #1a252f;
+      --success: #2ecc71;
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #f9fbfd;
-      color: #333;
-      line-height: 1.6;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+      color: var(--dark);
+      line-height: 1.7;
       overflow-x: hidden;
+      position: relative;
     }
+    
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(52, 152, 219, 0.05)" stroke-width="1"/></svg>');
+      z-index: -1;
+      opacity: 0.3;
+    }
+    
+    /* Header Styles */
     header {
-      background-color: #003366;
-      color: white;
-      padding: 1rem 2rem;
+      position: fixed;
+      top: 0;
+      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
+      padding: 1rem 5%;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
     }
+    
+    header.scrolled {
+      padding: 0.7rem 5%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+    
     .logo {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
       font-size: 1.5rem;
-      font-weight: 600;
+      color: var(--primary);
+      animation: float 6s ease-in-out infinite;
     }
+    
+    .logo img {
+      height: 40px;
+      margin-right: 12px;
+      transition: var(--transition);
+    }
+    
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
     nav a {
-      color: white;
       text-decoration: none;
-      margin-left: 1.2rem;
+      color: var(--primary);
       font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: var(--transition);
     }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--secondary);
+      transition: var(--transition);
+    }
+    
+    nav a:hover {
+      color: var(--secondary);
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    /* Hero Section */
     .hero {
-      background: linear-gradient(to right, #003366, #337ab7);
+      height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 10%;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(26, 37, 47, 0.9)), 
+                  url('images/ed.jpg');
+      background-size: cover;
+      background-position: center;
       color: white;
-      text-align: center;
-      padding: 4rem 2rem;
+      margin-top: 60px;
     }
+    
     .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 1s ease-out;
     }
+    
     .hero p {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
+      max-width: 800px;
+      margin-bottom: 2.5rem;
+      opacity: 0.9;
+      animation: fadeInUp 1.2s ease-out;
     }
+    
+    /* Section Styling */
     .section {
-      padding: 3rem 2rem;
-      max-width: 1000px;
-      margin: auto;
+      padding: 6rem 5%;
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-title {
       text-align: center;
+      margin-bottom: 4rem;
     }
-    .section h2 {
-      color: #003366;
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
       margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
     }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 2px;
+    }
+    
+    .section-title p {
+      font-size: 1.2rem;
+      color: var(--primary);
+      opacity: 0.8;
+      max-width: 700px;
+      margin: 2rem auto 0;
+    }
+    
     .section-content {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
+      gap: 3rem;
       align-items: center;
+      justify-content: center;
     }
-    .section-content img {
-      max-width: 400px;
-      border-radius: 10px;
-    }
-    .section-content .text {
-      max-width: 500px;
-      text-align: left;
-    }
-    .section-content .text h3 {
-      color: #003366;
-      margin-bottom: 0.5rem;
-    }
-    .values-slider {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      gap: 1rem;
-    }
-    .value {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      flex: 0 0 260px;
-      scroll-snap-align: center;
-      transition: transform 0.3s ease;
-    }
-    .value:hover {
-      transform: scale(1.05);
-    }
-    .values-controls {
-      display: flex;
-      justify-content: space-between;
-      margin: 1rem 0;
-    }
-    .values-controls button {
-      background: #003366;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .cta {
-      background-color: #003366;
-      color: white;
-      text-align: center;
+    
+    .text-content {
+      flex: 1;
+      min-width: 300px;
       padding: 2rem;
-    }
-    .cta a {
       background: white;
-      color: #003366;
-      padding: 10px 20px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 1rem;
-      display: inline-block;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      position: relative;
+      transition: var(--transition);
     }
-    footer {
-      background: #111;
-      color: #bbb;
+    
+    .text-content:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .text-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--secondary);
+    }
+    
+    .text-content h3 {
+      font-size: 1.8rem;
+      color: var(--secondary);
+      margin-bottom: 1.5rem;
+    }
+    
+    .image-container {
+      flex: 1;
+      min-width: 300px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      transition: var(--transition);
+    }
+    
+    .image-container:hover {
+      transform: scale(1.03);
+    }
+    
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    
+    /* Values Section */
+    .values-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .value-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       text-align: center;
-      padding: 1.5rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
     }
-    @media (max-width: 768px) {
+    
+    .value-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--secondary);
+    }
+    
+    .value-icon {
+      font-size: 3.5rem;
+      color: var(--secondary);
+      margin-bottom: 1.5rem;
+      transition: var(--transition);
+    }
+    
+    .value-card:hover .value-icon {
+      transform: scale(1.2) rotate(5deg);
+    }
+    
+    .value-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    /* Why Choose Us Section */
+    .features-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+    
+    .feature-item:hover {
+      transform: translateX(10px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-icon {
+      font-size: 1.8rem;
+      color: var(--secondary);
+      min-width: 50px;
+      height: 50px;
+      background: rgba(52, 152, 219, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    
+    .feature-item:hover .feature-icon {
+      background: var(--secondary);
+      color: white;
+      transform: scale(1.1);
+    }
+    
+    .feature-content h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+      color: white;
+      text-align: center;
+      padding: 5rem 2rem;
+      border-radius: 15px;
+      margin: 4rem auto;
+      max-width: 800px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    .cta-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .cta-section p {
+      font-size: 1.2rem;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0.9;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2.5rem;
+      background: white;
+      color: var(--secondary);
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .btn:hover {
+      background: var(--secondary);
+      color: white;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+    }
+    
+    footer p {
+      margin-top: 1.5rem;
+      opacity: 0.8;
+    }
+    
+    /* Animations */
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      
       .section-content {
         flex-direction: column;
-        text-align: center;
       }
-      .section-content .text {
-        text-align: center;
+      
+      .image-container, .text-content {
+        width: 100%;
+      }
+      
+      .section:nth-child(even) .section-content {
+        flex-direction: column-reverse;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+      
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+      
+      .hero p {
+        font-size: 1.2rem;
+      }
+      
+      .section {
+        padding: 4rem 5%;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
       }
     }
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header>
     <div class="logo">
-      <img src="images/itc-logo.png" alt="ITC Logo" style="height: 35px; vertical-align: middle; margin-right: 8px;">
-      <span style="vertical-align: middle;">ITC Online Library</span>
+      <img src="images/itc-logo.png" alt="ITC Logo">
+      <span>ITC Online Library</span>
     </div>
     <nav>
       <a href="index.html">Home</a>
-      <a href="about.html">About</a>
+      <a href="about.html" class="active">About</a>
       <a href="books.html">Books</a>
       <a href="course.html">Reviews</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
 
+  <!-- Hero Section -->
   <section class="hero">
     <h1>Empowering Minds Through Knowledge</h1>
     <p>Our mission is to provide students and educators with reliable and accessible academic resources.</p>
   </section>
 
+  <!-- Mission Section -->
   <section class="section">
-    <h2>Our Mission</h2>
+    <div class="section-title">
+      <h2>Our Mission</h2>
+      <p>Setting a new standard of digital learning at ITC Library</p>
+    </div>
+    
     <div class="section-content">
-      <img src="images/system.png" alt="Our Mission">
-      <div class="text">
+      <div class="image-container">
+        <img src="images/student-study.jpg" alt="Our Mission">
+      </div>
+      
+      <div class="text-content">
         <h3>Setting a new standard of digital learning</h3>
         <p>At ITC Library, we believe in the transformative power of education. We provide high-quality academic content including tutorials, books, and past papers to foster academic success for students and support teaching efforts of lecturers.</p>
+        <p>Our platform is designed to be intuitive and accessible, ensuring that valuable educational resources are just a click away for everyone in our community.</p>
       </div>
     </div>
   </section>
 
+  <!-- Vision Section -->
   <section class="section">
-    <h2>Our Vision</h2>
+    <div class="section-title">
+      <h2>Our Vision</h2>
+      <p>Bridging gaps with technology for a brighter educational future</p>
+    </div>
+    
     <div class="section-content">
-      <div class="text">
+      <div class="text-content">
         <h3>Bridging gaps with technology</h3>
         <p>Our vision is to be the leading online academic resource center in the region, empowering learners of all backgrounds through technology-driven access to information and learning tools.</p>
+        <p>We strive to create an ecosystem where knowledge flows freely, connecting students, educators, and resources in a seamless digital environment that transcends geographical boundaries.</p>
       </div>
-      <img src="images/think.png" alt="Our Vision">
+      
+      <div class="image-container">
+        <img src="images/think.png" alt="Our Vision">
+      </div>
     </div>
   </section>
 
+  <!-- Core Values Section -->
   <section class="section">
-    <h2>Core Values</h2>
-    <div class="values-controls">
-      <button onclick="scrollValues(-1)">←</button>
-      <button onclick="scrollValues(1)">→</button>
+    <div class="section-title">
+      <h2>Core Values</h2>
+      <p>The principles that guide our educational mission</p>
     </div>
-    <div class="values-slider" id="valuesSlider">
-      <div class="value">
-        <h3>🎓 Excellence</h3>
-        <p>We are committed to delivering high-quality academic content.</p>
+    
+    <div class="values-container">
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-medal"></i>
+        </div>
+        <h3>Excellence</h3>
+        <p>We are committed to delivering high-quality academic content that meets rigorous educational standards.</p>
       </div>
-      <div class="value">
-        <h3>💡 Innovation</h3>
-        <p>We embrace technology to drive modern education.</p>
+      
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <h3>Innovation</h3>
+        <p>We embrace technology to drive modern education and continuously improve our learning platform.</p>
       </div>
-      <div class="value">
-        <h3>📚 Accessibility</h3>
-        <p>Learning resources should be available to everyone, anytime.</p>
+      
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-universal-access"></i>
+        </div>
+        <h3>Accessibility</h3>
+        <p>Learning resources should be available to everyone, anytime, regardless of location or background.</p>
       </div>
-      <div class="value">
-        <h3>🤝 Collaboration</h3>
-        <p>We work with educators and institutions to enrich education.</p>
+      
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-hands-helping"></i>
+        </div>
+        <h3>Collaboration</h3>
+        <p>We work with educators and institutions to enrich education through shared resources and expertise.</p>
       </div>
     </div>
   </section>
 
+  <!-- Why Choose Us Section -->
   <section class="section">
-    <div class="section-content">
-      <img src="images/student-study1.png" alt="Why Choose Us Illustration">
-      <div class="text">
-        <h2>Why Choose ITC Online Library?</h2>
-        <ul>
-          <li>Accessible 24/7</li>
-          <li>Organized by course and department</li>
-          <li>Secure, easy payments and verification</li>
-          <li>Resource contributions by verified lecturers</li>
-          <li>Modern user interface and experience</li>
-        </ul>
+    <div class="section-title">
+      <h2>Why Choose ITC Online Library?</h2>
+      <p>Discover what makes our platform the preferred choice for students and educators</p>
+    </div>
+    
+    <div class="features-list">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <div class="feature-content">
+          <h3>Accessible 24/7</h3>
+          <p>Our digital library is available anytime, anywhere, providing uninterrupted access to learning resources.</p>
+        </div>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-book"></i>
+        </div>
+        <div class="feature-content">
+          <h3>Organized Resources</h3>
+          <p>Content is systematically organized by course and department for easy navigation and discovery.</p>
+        </div>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <div class="feature-content">
+          <h3>Secure Payments</h3>
+          <p>Enjoy peace of mind with our secure, easy payment and verification systems for all transactions.</p>
+        </div>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+        <div class="feature-content">
+          <h3>Expert Contributions</h3>
+          <p>Resources are contributed and vetted by verified lecturers to ensure academic quality and relevance.</p>
+        </div>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-laptop"></i>
+        </div>
+        <div class="feature-content">
+          <h3>Modern Interface</h3>
+          <p>Experience seamless learning with our intuitive, user-friendly platform designed for optimal engagement.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="cta">
-    <h2>Ready to Explore the Library?</h2>
-    <a href="books.html">Browse Books</a>
+  <!-- CTA Section -->
+  <section class="section">
+    <div class="cta-section">
+      <h2>Ready to Explore the Library?</h2>
+      <p>Join thousands of students and educators who are transforming their learning experience with ITC Online Library</p>
+      <a href="books.html" class="btn">Browse Books</a>
+    </div>
   </section>
 
+  <!-- Footer -->
   <footer>
-    &copy; 2025 ITC Online Library. Crafted by Lenord Siakunkuma 💻
+    <div class="logo">
+      <img src="images/itc.jpg" alt="ITC Logo">
+      <span>ITC Online Library</span>
+    </div>
+    <p>&copy; 2025 ITC Online Library. Crafted by Lenord Siakunkuma</p>
   </footer>
 
   <script>
-    function scrollValues(direction) {
-      const slider = document.getElementById('valuesSlider');
-      slider.scrollBy({
-        left: direction * 300,
-        behavior: 'smooth'
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Animate elements on scroll
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.section-content, .value-card, .feature-item');
+      
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+        
+        if (elementPosition < screenPosition) {
+          element.style.opacity = 1;
+          element.style.transform = 'translateY(0)';
+        }
       });
-    }
+    };
+    
+    // Set initial styles for animation
+    document.querySelectorAll('.section-content, .value-card, .feature-item').forEach(el => {
+      el.style.opacity = 0;
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    
+    // Listen for scroll events
+    window.addEventListener('scroll', animateOnScroll);
+    
+    // Trigger once on load
+    window.addEventListener('load', animateOnScroll);
   </script>
-
 </body>
 </html>
